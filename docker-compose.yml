@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+  app:
+    build: ./app/
+    depends_on:
+      - db
+    networks:
+      - test
+
+  db:
+    image: postgres:14.1-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=zno
+    ports:
+      - '5432:5432'
+    networks:
+      - test
+
+networks:
+  test:
